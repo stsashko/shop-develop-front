@@ -12,6 +12,11 @@ axios.interceptors.request.use(
             config.headers.authorization = `Bearer ${authToken}`;
         }
 
+        config.headers.common['Accept'] = 'application/json';
+
+
+        // 'Content-Type': 'application/json',
+
         return config;
     },
     (error) => Promise.reject(error)
