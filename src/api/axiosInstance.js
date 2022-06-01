@@ -9,11 +9,11 @@ axios.interceptors.request.use(
         const authToken = Cookies.get("auth-token");
 
         if (authToken) {
-            config.headers.authorization = `Bearer ${authToken}`;
+            // config.headers.authorization = `Bearer ${authToken}`;
+            config.headers.common['Authorization'] = `Bearer ${authToken}`;
         }
 
         config.headers.common['Accept'] = 'application/json';
-
 
         // 'Content-Type': 'application/json',
 
