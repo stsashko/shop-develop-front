@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:8001/api/';
+axios.defaults.baseURL = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? process.env.REACT_APP_API_URL_DEV : process.env.REACT_APP_API_URL;
 
 axios.interceptors.request.use(
     (config) => {
