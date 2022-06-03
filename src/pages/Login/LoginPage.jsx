@@ -49,8 +49,6 @@ export default function LoginPage() {
     const onSubmit = (data) => {
         setLoading(true);
 
-        console.log(data);
-
         loginApi(data)
             .then((user) => {
                 dispatch(setUserAction(user));
