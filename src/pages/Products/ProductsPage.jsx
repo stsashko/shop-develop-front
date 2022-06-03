@@ -238,7 +238,7 @@ const ProductsPage = () => {
                                         <TableCell
                                             component="th"
                                             scope="row"
-                                            colSpan={6}
+                                            colSpan={7}
                                             sx={{textAlign: 'center'}}
                                         >
                                             <CircularProgress/>
