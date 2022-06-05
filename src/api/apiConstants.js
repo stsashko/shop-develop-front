@@ -7,6 +7,11 @@ export const API_PATH = {
     login: 'login',
     register: 'register',
     getUser: 'user',
+    getUsers: 'users',
+    addUser: 'user',
+    updUser: 'user',
+    deleteUser: 'user',
+
     logOut: 'logout',
     updProfile: 'profile',
 
@@ -57,8 +62,6 @@ export const API_PATH = {
     addStore: 'store',
     updStore: 'store',
     deleteStore: 'store',
-
-
 
     // comments: 'comments',
     // albums: 'albums',

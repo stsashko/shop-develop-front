@@ -11,6 +11,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PeopleIcon from "@mui/icons-material/People";
 import CategoryIcon from '@mui/icons-material/Category';
+import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
@@ -20,6 +21,9 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import StoreIcon from '@mui/icons-material/Store';
 // import {Route} from "react-router-dom";
+
+import {useSelector} from "react-redux";
+
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import {
     CATEGORIES_ROUTE,
@@ -27,7 +31,7 @@ import {
     DASHBOARD_ROUTE,
     DELIVERIES_ROUTE,
     MANUFACTURERS_ROUTE,
-    ORDERS_ROUTE, PRODUCTS_ROUTE, PURCHASES_ROUTE, STORES_ROUTE
+    ORDERS_ROUTE, PRODUCTS_ROUTE, PURCHASES_ROUTE, STORES_ROUTE, USERS_ROUTE
 } from "../RouterConstants";
 
 // <Route path="orders" element={<Orders />} />
@@ -52,13 +56,13 @@ const menuMain = [
     {title: 'Stores', Icon: <StoreIcon/>, path: STORES_ROUTE},
 ];
 
-// const secondMenu = [
-//     {title: 'Current month', Icon: <AssignmentIcon/>},
-//     {title: 'Last quarter', Icon: <AssignmentIcon/>},
-//     {title: 'Year-end sale', Icon: <AssignmentIcon/>},
-// ];
+const secondMenu = [
+    {title: 'Users', Icon: <PeopleOutlineIcon/>, path: USERS_ROUTE}
+];
 
 export default ({open, drawerWidth, toggleDrawer}) => {
+
+    const role = useSelector(({authReducer}) => authReducer.user.role);
 
     const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
         ({theme, open}) => ({
@@ -120,17 +124,19 @@ export default ({open, drawerWidth, toggleDrawer}) => {
                         <ListItemText primary={item.title}/>
                     </ListItemButton>
                 ))}
-
-                {/*<Divider sx={{my: 1}}/>*/}
-                {/*{secondMenu.map(item => (*/}
-                {/*    <ListItemButton key={item.title}>*/}
-                {/*        <ListItemIcon>*/}
-                {/*            {item.Icon}*/}
-                {/*        </ListItemIcon>*/}
-                {/*        <ListItemText primary={item.title}/>*/}
-                {/*    </ListItemButton>*/}
-                {/*))}*/}
-
+                {role === 1 && (
+                    <React.Fragment>
+                        <Divider sx={{my: 1}}/>
+                        {secondMenu.map(item => (
+                            <ListItemButton key={item.title} to={item.path} component={NavLink} selected={pathname === `/${item.path}`}>
+                                <ListItemIcon>
+                                    {item.Icon}
+                                </ListItemIcon>
+                                <ListItemText primary={item.title}/>
+                            </ListItemButton>
+                        ))}
+                    </React.Fragment>
+                )}
             </List>
         </Drawer>
     );

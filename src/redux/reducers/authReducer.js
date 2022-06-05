@@ -16,10 +16,10 @@ const authReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SET_USER:
-            let {id, name, email, avatar} = action.payload;
+            let {id, name, email, avatar, role} = action.payload;
             return {
                 ...state,
-                user: {id, name, email, avatar}
+                user: {id, name, email, avatar, role}
             }
         case SET_AUTHENTICATED:
             return {

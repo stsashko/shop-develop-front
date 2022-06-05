@@ -22,6 +22,7 @@ export const PURCHASES_ROUTE = 'purchases'
 export const STORES_ROUTE = 'stores'
 export const LOGOUT_ROUTE = 'logout'
 export const PROFILE_ROUTE = 'profile'
+export const USERS_ROUTE = 'users'
 
 
 // const menuMain = [

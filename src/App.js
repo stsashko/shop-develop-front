@@ -23,16 +23,23 @@ import StoresPage from "./pages/Stores/StoresPage";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import RegisterPage from "./pages/Register/RegisterPage";
+import UsersPage from "./pages/Users/UsersPage";
+import Page404 from "./pages/Page404";
 
 function App() {
     const dispatch = useDispatch();
-    const authenticated = useSelector(({authReducer}) => authReducer.authenticated);
+
+    const user = useSelector(({authReducer}) => ({
+        authenticated: authReducer.authenticated,
+        role: authReducer.user.role,
+    }));
+
     const loading = useSelector(({authReducer}) => authReducer.loading);
 
     useEffect(() => {
-        if(!authenticated)
+        if(!user.authenticated)
             dispatch(getUserAction());
-    },[authenticated]);
+    },[user.authenticated]);
 
     if(loading)
         return (
@@ -61,9 +68,9 @@ function App() {
                 <Route path="purchases" element={<PurchasesPage/>}/>
                 <Route path="stores" element={<StoresPage/>}/>
                 <Route path="profile" element={<ProfilePage />}/>
+                {user.role && <Route path="users" element={<UsersPage />}/>}
             </Route>
-            <Route path="*" element={<p>404 page</p>} />
-            {/*<Notfoundpage />*/}
+            <Route path="*" element={<Page404 />} />
         </Routes>
     );
 }

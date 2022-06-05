@@ -22,10 +22,12 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import TopHeader from './TopHeader';
 import Sidebar from "./Sidebar";
 
+import { isMobile } from 'react-device-detect';
+
 const drawerWidth = 240;
 
 const Header = () => {
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(!isMobile);
     const toggleDrawer = () => {
         setOpen(!open);
     };
