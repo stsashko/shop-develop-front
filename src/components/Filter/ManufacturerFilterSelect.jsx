@@ -5,9 +5,7 @@ import Grid from "@mui/material/Grid";
 import {getManufacturersAllApi} from "../../api/manufacturerApi";
 
 export const ManufacturerFilterSelect = ({control, defaultValue}) => {
-
     const [manufacturers, setManufacturers] = useState([]);
-
     const getManufacturers = useCallback(() => {
         getManufacturersAllApi()
             .then(({data}) => {
@@ -21,7 +19,6 @@ export const ManufacturerFilterSelect = ({control, defaultValue}) => {
     useEffect(() => {
         getManufacturers();
     }, [getManufacturers]);
-
 
     return (
         <Grid item xs={12} sm={6} md={4}>
@@ -47,5 +44,4 @@ export const ManufacturerFilterSelect = ({control, defaultValue}) => {
             />
         </Grid>
     );
-
 }

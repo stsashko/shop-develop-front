@@ -2,15 +2,9 @@ import axios from "./axiosInstance";
 import {API_PATH} from "./apiConstants";
 import Cookies from "js-cookie";
 
-// if (tokenData) {
-//     Cookies.set("auth-token", tokenData);
-// } else {
-//     Cookies.remove("auth-token");
-// }
 
 export const loginApi = (data) => {
     return new Promise((resolve, reject) => {
-
         axios.post(API_PATH.login, {
             email: data.email,
             password: data.password
@@ -25,24 +19,17 @@ export const loginApi = (data) => {
                     Cookies.remove("auth-token");
                     reject(response.errors);
                 }
-
-                // setTimeout(() => {
-                //     resolve(response.data);
-                // }, 999)
             })
             .catch(error => {
                 Cookies.remove("auth-token");
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
 
     });
 }
 
-
 export const registerApi = (data) => {
     return new Promise((resolve, reject) => {
-
         const formData = new FormData();
         for (const [key, value] of Object.entries(data)) {
             if(key === 'file')
@@ -67,19 +54,13 @@ export const registerApi = (data) => {
                     Cookies.remove("auth-token");
                     reject(response.errors);
                 }
-
-                // setTimeout(() => {
-                //     resolve(response.data);
-                // }, 999)
             })
             .catch(error => {
                 Cookies.remove("auth-token");
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
-
 
 export const getUserApi = () => {
     return new Promise((resolve, reject) => {
@@ -91,18 +72,12 @@ export const getUserApi = () => {
                 else {
                     reject(response.errors);
                 }
-
-                // setTimeout(() => {
-                //     resolve(response.data);
-                // }, 999)
             })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
-
 
 export const logOutApi = () => {
     return new Promise((resolve, reject) => {
@@ -115,16 +90,9 @@ export const logOutApi = () => {
                 else {
                     reject(response.errors);
                 }
-
-                // setTimeout(() => {
-                //     resolve(response.data);
-                // }, 999)
             })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
-
-

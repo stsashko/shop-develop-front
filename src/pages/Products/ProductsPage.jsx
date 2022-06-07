@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-
 import Paper from "@mui/material/Paper";
 import {Content} from "../../components/Content";
 import Box from "@mui/material/Box";
@@ -16,33 +15,21 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-
 import {createSearchParams, useNavigate} from "react-router-dom";
-
 import {getProductsApi, addProductApi, deleteProductApi, getProductApi, updProductApi} from "../../api/productApi";
-
 import Avatar from "@mui/material/Avatar";
-
 import {useQuery} from "../../hooks/useQuery/useQuery";
 import {FilterLayout} from "../../components/Filter/FilterLayout";
 import {ManufacturerFilterSelect} from "../../components/Filter/ManufacturerFilterSelect";
 import {SearchFilterField} from "../../components/Filter/SearchFilterField";
 import {CategoryFilterSelect} from "../../components/Filter/CategoryFilterSelect";
-
 import useHead from "../../hooks/useHead";
 import {TableHeadSort} from "../../components/Table/TableHeadSort";
 import Button from "@mui/material/Button";
-// import {ProductModal} from "../../components/ProductModal/ProductModal";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-
 import ConfirmDelete from "../../components/ConfirmDelete";
-import {addDeliveryApi, getDeliveryApi, updDeliveryApi} from "../../api/deliveriesApi";
 import validationSchemaModal from "./validationModal";
-import {ProductModalSelect} from "../../components/ModalFields/ProductModalSelect";
-import {StoreModalSelect} from "../../components/ModalFields/StoreModalSelect";
-import {DateModalField} from "../../components/ModalFields/DateModalField";
-import {NumberModalField} from "../../components/ModalFields/NumberModalField";
 import ModalData from "../../components/ModalData";
 import {TextModalField} from "../../components/ModalFields/TextModalField";
 import {FileImageModalField} from "../../components/ModalFields/FileImageModalField";
@@ -50,7 +37,6 @@ import {CategoryModalSelect} from "../../components/ModalFields/CategoryModalSel
 import {ManufacturerModalSelect} from "../../components/ModalFields/ManufacturerModalSelect";
 
 const ProductsPage = () => {
-
     const query = useQuery();
 
     const head = useHead();
@@ -58,21 +44,29 @@ const ProductsPage = () => {
     const [products, setProducts] = useState([]);
 
     const [order, setOrder] = useState(query.get("order") || '');
+
     const [orderBy, setOrderBy] = useState(query.get("orderBy") || '');
 
     const [total, setTotal] = useState(0);
+
     const [page, setPage] = useState((query.get("page") ? parseInt(query.get("page")) - 1 : false) || 0);
+
     const [rowsPerPage, setRowsPerPage] = useState(30);
+
     const [dataFetched, setDataFetched] = useState(true);
+
     const [loading, setLoading] = useState(false);
+
     const [filter, setFilter] = useState({
         search: query.get("search") || '',
         category_id: query.get("category_id") || '',
         manufacturer_id: query.get("manufacturer_id") || ''
     });
 
-    const [openBackdrop, setOpenBackdrop] = useState(false)
+    const [openBackdrop, setOpenBackdrop] = useState(false);
+
     const [openModal, setOpenModal] = useState(false);
+
     const [productId, setProductId] = useState(null);
 
     const [loadingConfirm, setLoadingConfirm] = useState(false);
@@ -80,8 +74,6 @@ const ProductsPage = () => {
     const navigate = useNavigate();
 
     const [confirmDelete, setConfirmDelete] = useState(false);
-    
-    // const {control} = useForm();
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -103,9 +95,7 @@ const ProductsPage = () => {
     }
     
     const handleDelete = (id) => {
-
         setLoadingConfirm(true);
-
         deleteProductApi(id)
             .then((data) => {
                 deleteSingleProduct(id);
@@ -128,7 +118,6 @@ const ProductsPage = () => {
                 id, category_name, image, manufacturer_name, price, product_name, updated_at
             } : currentItem;
         })
-
         setProducts(productsNew);
         setOpenModal(false);
         setProductId(null);
@@ -145,7 +134,6 @@ const ProductsPage = () => {
 
     useEffect(() => {
         setDataFetched(true);
-
         let params = Object.fromEntries(Object.entries({
             page: page + 1,
             order,
@@ -165,7 +153,6 @@ const ProductsPage = () => {
             setDataFetched(false);
             setLoading(false);
         });
-
     }, [order, orderBy, page, rowsPerPage, filter]);
 
     const openProduct = (e, id) => {
@@ -192,8 +179,6 @@ const ProductsPage = () => {
                 <CategoryFilterSelect defaultValue={filter.category_id}/>
                 <ManufacturerFilterSelect defaultValue={filter.manufacturer_id}/>
             </FilterLayout>
-
-
             <Box sx={{width: '100%'}}>
                 <Paper sx={{width: '100%', mb: 2}}>
                     <Toolbar sx={{pl: {sm: 2}, pr: {xs: 1, sm: 1}}}>
@@ -282,12 +267,9 @@ const ProductsPage = () => {
                                         })}
                                     </React.Fragment>)
                                 }
-
-
                             </TableBody>
                         </Table>
                     </TableContainer>
-
                     <TablePagination
                         rowsPerPageOptions={[30, 50, 100]}
                         component="div"
@@ -328,7 +310,6 @@ const ProductsPage = () => {
                     </ModalData>
                 </React.Fragment>
             )}
-
             <ConfirmDelete confirmDelete={confirmDelete} setConfirmDelete={setConfirmDelete} loading={loadingConfirm}
                            handleDelete={handleDelete}/>
         </Content>

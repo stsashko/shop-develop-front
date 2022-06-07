@@ -1,13 +1,11 @@
-import React, {useCallback, useEffect, useState, useMemo} from "react";
+import React, {useEffect, useState, useMemo} from "react";
 import {Controller} from "react-hook-form";
-import {CircularProgress, FormControl, FormHelperText, MenuItem, OutlinedInput, Select, TextField} from "@mui/material";
-import {getCategoriesAllApi} from "../../api/categoryApi";
+import {CircularProgress, TextField} from "@mui/material";
 import {findCustomerApi} from "../../api/customerApi";
 import Autocomplete from "@mui/material/Autocomplete";
 import throttle from 'lodash/throttle'
 
-export const CustomerModalSelect  = ({control, defaultValue, errors, helperText, register, setValue, trigger, dataDb}) => {
-
+export const CustomerModalSelect  = ({control, defaultValue, errors, helperText, setValue, dataDb}) => {
     defaultValue = defaultValue ? {id: defaultValue, label: dataDb.customer_name} : '';
 
     const [valueCurrent, setValueCurrent] = useState(defaultValue);
@@ -34,14 +32,12 @@ export const CustomerModalSelect  = ({control, defaultValue, errors, helperText,
         [],
     );
 
-
     useEffect(() => {
         if(defaultValue?.id)
             setValue('customer_id', defaultValue.id);
     }, [defaultValue?.id])
 
     useEffect(() => {
-
         let active = true;
 
         if (!open)
@@ -125,12 +121,10 @@ export const CustomerModalSelect  = ({control, defaultValue, errors, helperText,
                             </React.Fragment>
                         )
                     }}
-
                 />
             )}
             control={control}
             defaultValue={defaultValue}
         />
     );
-
 }

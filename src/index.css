@@ -2,9 +2,7 @@ body {
     margin: 0;
     padding: 0;
 }
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-
 /* fallback */
 @font-face {
     font-family: 'Material Icons';
@@ -12,7 +10,6 @@ body {
     font-weight: 400;
     src: url(https://fonts.gstatic.com/s/materialicons/v126/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
 }
-
 .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;

@@ -14,7 +14,6 @@ export const FilterLayout = ({setPage, filter, setFilter, loading, setLoading, c
         reset
     } = useForm();
 
-
     const onSubmitFilter = (data) => {
         setLoading(true);
         setPage(0);
@@ -30,7 +29,6 @@ export const FilterLayout = ({setPage, filter, setFilter, loading, setLoading, c
         setFilter({
             ...filter,
             ...resetFields
-            // search: '', category_id: '', manufacturer_id: ''
         });
         reset();
     }
@@ -66,5 +64,4 @@ export const FilterLayout = ({setPage, filter, setFilter, loading, setLoading, c
             </form>
         </Paper>
     );
-
 }

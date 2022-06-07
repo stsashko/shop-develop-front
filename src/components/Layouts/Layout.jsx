@@ -3,13 +3,11 @@ import { Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
-
 import Header from "./Header";
 import Copyright from "./Copyright";
 import LoadDelay from "../LoadDelay/LoadDelay";
 
 export default function Layout() {
-
     return (
         <Box sx={{ display: 'flex' }}>
             <Header />
@@ -37,18 +35,3 @@ export default function Layout() {
         </Box>
     );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { CustomLink } from './CustomLink'
-

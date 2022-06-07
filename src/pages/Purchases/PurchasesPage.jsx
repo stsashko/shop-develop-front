@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import {Content} from "../../components/Content";
 import {useQuery} from "../../hooks/useQuery/useQuery";
@@ -33,18 +32,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ModalData from "../../components/ModalData";
 import validationSchemaModal from "./validationModal";
 import ConfirmDelete from "../../components/ConfirmDelete";
-import {ProductFilterSelect} from "../../components/Filter/ProductFilterSelect";
 import {StoreFilterSelect} from "../../components/Filter/StoreFilterSelect";
 import {DateFilterRange} from "../../components/Filter/DateFilterRange.";
-import {ProductModalSelect} from "../../components/ModalFields/ProductModalSelect";
 import {StoreModalSelect} from "../../components/ModalFields/StoreModalSelect";
 import {DateModalField} from "../../components/ModalFields/DateModalField";
-import {NumberModalField} from "../../components/ModalFields/NumberModalField";
 import {CustomerFilterSelect} from "../../components/Filter/CustomerFilterSelect";
 import {CustomerModalSelect} from "../../components/ModalFields/СustomerModalSelect";
 
 const PurchasesPage = () => {
-
     const query = useQuery();
 
     const head = useHead();
@@ -52,13 +47,15 @@ const PurchasesPage = () => {
     const [purchases, setPurchases] = useState([]);
 
     const [total, setTotal] = useState(0);
+
     const [page, setPage] = useState((query.get("page") ? parseInt(query.get("page")) : false) || 1);
 
-    const [rowsPerPage, setRowsPerPage] = useState(30);
+    const rowsPerPage = 30;
 
     const [dataFetched, setDataFetched] = useState(true);
 
     const [loading, setLoading] = useState(false);
+
     const [loadingConfirm, setLoadingConfirm] = useState(false);
 
     const [confirmDelete, setConfirmDelete] = useState(false);
@@ -70,8 +67,9 @@ const PurchasesPage = () => {
     });
 
     const [openBackdrop, setOpenBackdrop] = useState(false)
+
     const [openModal, setOpenModal] = useState(false);
-    // const [productId, setProductId] = useState(null);
+
     const [purchaseId, setPurchaseId] = useState(null);
 
     const navigate = useNavigate();
@@ -85,7 +83,6 @@ const PurchasesPage = () => {
                                       product_id,
                                       store_id,
                                       purchase_date,
-
                                       created_at,
                                       updated_at,
                                       customer_name,
@@ -169,7 +166,6 @@ const PurchasesPage = () => {
     }
 
     const handleDelete = (id) => {
-
         setLoadingConfirm(true);
 
         deletePurchaseApi(id)
@@ -184,7 +180,6 @@ const PurchasesPage = () => {
         });
     }
 
-
     return (
         <Content title="Purchases" titlePage="Purchases">
             <FilterLayout
@@ -195,11 +190,10 @@ const PurchasesPage = () => {
                 setLoading={setLoading}
                 resetFields={{customer_id: '', store_id: '', date: ''}}
             >
-                <CustomerFilterSelect defaultValue={filter.customer_id} />
+                <CustomerFilterSelect defaultValue={filter.customer_id}/>
                 <StoreFilterSelect defaultValue={filter.store_id}/>
                 <DateFilterRange defaultValue={filter.date}/>
             </FilterLayout>
-
             <Box sx={{width: '100%'}}>
                 <Paper sx={{width: '100%', mb: 2}}>
                     <Pagination count={Math.ceil(total / rowsPerPage)} page={page} onChange={handleChangePage}
@@ -213,7 +207,6 @@ const PurchasesPage = () => {
                         >
                             {head.titlePage}
                         </Typography>
-
                         <Button variant="outlined" size="small" onClick={() => setOpenModal(true)}>Create</Button>
                     </Toolbar>
                     <TableContainer>
@@ -284,7 +277,6 @@ const PurchasesPage = () => {
                                         })}
                                     </React.Fragment>)
                                 }
-
                             </TableBody>
                         </Table>
                     </TableContainer>
@@ -300,7 +292,6 @@ const PurchasesPage = () => {
                     >
                         <CircularProgress color="inherit"/>
                     </Backdrop>
-
                     <ModalData
                         title="purchase"
                         id={purchaseId}
@@ -320,11 +311,9 @@ const PurchasesPage = () => {
                     </ModalData>
                 </React.Fragment>
             )}
-
             <ConfirmDelete confirmDelete={confirmDelete} setConfirmDelete={setConfirmDelete} loading={loadingConfirm}
                            handleDelete={handleDelete}/>
         </Content>
     );
 }
-
 export default PurchasesPage;

@@ -1,6 +1,3 @@
-// https://github.com/jquense/yup
-// number().label('age').positive().integer(),
-
 import * as yup from "yup";
 
 const schema = yup.object().shape({

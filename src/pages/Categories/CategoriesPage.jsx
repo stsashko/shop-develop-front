@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import {Content} from "../../components/Content";
 import {useQuery} from "../../hooks/useQuery/useQuery";
@@ -34,7 +33,6 @@ import {TextModalField} from "../../components/ModalFields/TextModalField";
 import ConfirmDelete from "../../components/ConfirmDelete";
 
 const CategoriesPage = () => {
-
     const query = useQuery();
 
     const head = useHead();
@@ -59,28 +57,12 @@ const CategoriesPage = () => {
 
     const [openBackdrop, setOpenBackdrop] = useState(false)
     const [openModal, setOpenModal] = useState(false);
-    // const [productId, setProductId] = useState(null);
     const [categoryId, setCategoryId] = useState(null);
-
     const navigate = useNavigate();
-
-    // const {control} = useForm();
-
-    // const handleRequestSort = (event, property) => {
-    //     const isAsc = orderBy === property && order === 'asc';
-    //     setOrder(isAsc ? 'desc' : 'asc');
-    //     setOrderBy(property);
-    // };
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
-
-    // const handleChangeRowsPerPage = (event) => {
-    //     setRowsPerPage(parseInt(event.target.value, 10));
-    //     setPage(1);
-    // };
-
 
     const updateSingleCategory = ({id, category_name, created_at, updated_at}) => {
         const categoriesNew = categories.map(currentItem => {
@@ -88,7 +70,6 @@ const CategoriesPage = () => {
                 id, category_name, created_at, updated_at
             } : currentItem;
         })
-
         setCategories(categoriesNew);
         setOpenModal(false);
         setCategoryId(null);
@@ -152,7 +133,6 @@ const CategoriesPage = () => {
     }
 
     const handleDelete = (id) => {
-
         setLoadingConfirm(true);
 
         deleteCategoryApi(id)
@@ -165,13 +145,7 @@ const CategoriesPage = () => {
             setLoadingConfirm(false);
             setConfirmDelete(false);
         });
-
-        // alert(id);
-
-        // setConfirmDelete(true);
-        // alert(id);
     }
-
 
     return (
         <Content title="Categories" titlePage="Categories">
@@ -179,7 +153,6 @@ const CategoriesPage = () => {
                           setLoading={setLoading} resetFields={{search: ''}}>
                 <SearchFilterField defaultValue={filter.search}/>
             </FilterLayout>
-
             <Box sx={{width: '100%'}}>
                 <Paper sx={{width: '100%', mb: 2}}>
                     <Pagination count={Math.ceil(total / rowsPerPage)} page={page} onChange={handleChangePage}
@@ -258,8 +231,6 @@ const CategoriesPage = () => {
                                         })}
                                     </React.Fragment>)
                                 }
-
-
                             </TableBody>
                         </Table>
                     </TableContainer>
@@ -275,7 +246,6 @@ const CategoriesPage = () => {
                     >
                         <CircularProgress color="inherit"/>
                     </Backdrop>
-
                     <ModalData
                         title="category"
                         id={categoryId}
@@ -296,7 +266,6 @@ const CategoriesPage = () => {
                     </ModalData>
                 </React.Fragment>
             )}
-
             <ConfirmDelete confirmDelete={confirmDelete} setConfirmDelete={setConfirmDelete} loading={loadingConfirm}
                            handleDelete={handleDelete}/>
         </Content>

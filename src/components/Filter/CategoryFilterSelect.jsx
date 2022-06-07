@@ -21,7 +21,6 @@ export const CategoryFilterSelect = ({control, defaultValue}) => {
         getCategories();
     }, [getCategories]);
 
-
     return (
         <Grid item xs={12} sm={6} md={4}>
             <Controller
@@ -46,5 +45,4 @@ export const CategoryFilterSelect = ({control, defaultValue}) => {
             />
         </Grid>
     );
-
 }

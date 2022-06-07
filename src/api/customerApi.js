@@ -17,14 +17,9 @@ export const getCustomersApi = ({page, rowsPerPage, search}) => {
             } else {
                 reject(response.errors);
             }
-
-            // setTimeout(() => {
-            //     resolve(response.data);
-            // }, 999)
         })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
@@ -38,18 +33,12 @@ export const getCustomerApi = (id) => {
             } else {
                 reject(response.errors);
             }
-
-            // setTimeout(() => {
-            //     resolve(response.data);
-            // }, 999)
         })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
-
 
 export const addCustomerApi = (data) => {
     return new Promise((resolve, reject) => {
@@ -60,18 +49,12 @@ export const addCustomerApi = (data) => {
             } else {
                 reject(response.errors);
             }
-
-            // setTimeout(() => {
-            //     resolve(response.data);
-            // }, 999)
         })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
-
 
 export const updCustomerApi = (id, data) => {
     return new Promise((resolve, reject) => {
@@ -82,14 +65,9 @@ export const updCustomerApi = (id, data) => {
             } else {
                 reject(response.errors);
             }
-
-            // setTimeout(() => {
-            //     resolve(response.data);
-            // }, 999)
         })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
@@ -97,30 +75,20 @@ export const updCustomerApi = (id, data) => {
 export const deleteCustomerApi = (id) => {
     return new Promise((resolve, reject) => {
         axios.delete(`${API_PATH.deleteCustomer}/${id}`).then(({data: response}) => {
-
             if (response.success) {
                 resolve(true);
             } else {
                 reject(response.errors);
             }
-
-            // setTimeout(() => {
-            //     resolve(response.data);
-            // }, 999)
         })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
 
-
-
 export const findCustomerApi = (search) => {
-
     return new Promise((resolve, reject) => {
-
         axios.get(API_PATH.findCustomer, {
             params: {
                 search
@@ -133,14 +101,9 @@ export const findCustomerApi = (search) => {
                 else {
                     reject(response.errors);
                 }
-                // setTimeout(() => {
-                //     resolve(response.data);
-                // }, 999)
             })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
-
 }

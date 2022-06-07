@@ -1,68 +1,48 @@
-import React, {useCallback, useEffect, useState} from "react";
-import {Controller} from "react-hook-form";
-import {CircularProgress, MenuItem, OutlinedInput, Select, TextField} from "@mui/material";
+import React, {useEffect, useState} from "react";
+import {CircularProgress, TextField} from "@mui/material";
 import Grid from "@mui/material/Grid";
-import {getProductsAllApi} from "../../api/categoryApi";
 import Autocomplete from '@mui/material/Autocomplete';
 import {findProductApi} from "../../api/productApi";
 
-
-export const ProductFilterSelect = ({control, defaultValue, register, setValue}) => {
-
+export const ProductFilterSelect = ({defaultValue, register, setValue}) => {
     defaultValue = defaultValue ? {product_name: defaultValue} : '';
-
     const [valueCurent, setValueCurrent] = React.useState(defaultValue);
     const [inputValue, setInputValue] = React.useState('');
     const [options, setOptions] = React.useState([]);
-
     const [open, setOpen] = useState(false);
-
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         let active = true;
-
         if (!open)
             return undefined;
-
         if (inputValue === '') {
             setOptions(valueCurent ? [valueCurent] : []);
             return undefined;
         }
-
         (async () => {
             if (active) {
                 setLoading(true);
                 try {
                     let results = await findProductApi(inputValue);
-
                     let newOptions = [];
-
                     if (valueCurent)
                         newOptions = [valueCurent];
-
                     if (results)
                         newOptions = [...newOptions, ...results];
-
                     setOptions(newOptions);
-
-                } catch (err) {
-                    // console.log(err);
-                }
+                } catch (err) {}
                 setLoading(false);
             }
         })();
-
 
         return () => {
             active = false;
         };
     }, [valueCurent, inputValue]);
 
-
     return (
         <Grid item xs={12} sm={6} md={4}>
-
             <Autocomplete
                 id="product-asynchronous"
                 open={open}
@@ -72,7 +52,6 @@ export const ProductFilterSelect = ({control, defaultValue, register, setValue})
                 onClose={() => {
                     setOpen(false);
                 }}
-
                 getOptionLabel={(option) => typeof option === 'string' ? option : option.product_name}
                 filterOptions={(x) => x}
                 options={options}
@@ -84,9 +63,7 @@ export const ProductFilterSelect = ({control, defaultValue, register, setValue})
                 onChange={(event, newValue) => {
                     setOptions(newValue ? [newValue, ...options] : options);
                     setValueCurrent(newValue);
-
                     setValue('product_name', newValue?.product_name || '');
-
                 }}
                 onInputChange={(event, newInputValue) => {
                     setInputValue(newInputValue);
@@ -115,19 +92,6 @@ export const ProductFilterSelect = ({control, defaultValue, register, setValue})
                     )
                 }}
             />
-
-
         </Grid>
     );
-
 }
-
-
-
-
-
-
-
-
-
-

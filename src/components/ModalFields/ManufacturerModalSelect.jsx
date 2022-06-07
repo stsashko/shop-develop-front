@@ -4,7 +4,6 @@ import {
     CircularProgress,
     FormControl,
     FormHelperText,
-    InputLabel,
     MenuItem,
     OutlinedInput,
     Select
@@ -12,7 +11,6 @@ import {
 import {getManufacturersAllApi} from "../../api/manufacturerApi";
 
 export const ManufacturerModalSelect = ({control, defaultValue, errors, helperText}) => {
-
     const [manufacturers, setManufacturers] = useState([]);
 
     const getManufacturers = useCallback(() => {
@@ -28,7 +26,6 @@ export const ManufacturerModalSelect = ({control, defaultValue, errors, helperTe
     useEffect(() => {
         getManufacturers();
     }, [getManufacturers]);
-
 
     if(manufacturers.length === 0)
         return <Select size="small" defaultValue="1" fullWidth><MenuItem value="1"><CircularProgress style={{width: '17px', height: '17px', marginTop: '3px', verticalAlign: 'top'}} /></MenuItem></Select>;

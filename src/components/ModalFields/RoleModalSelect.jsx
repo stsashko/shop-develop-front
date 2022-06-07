@@ -3,7 +3,6 @@ import {Controller} from "react-hook-form";
 import { FormControl, FormHelperText, MenuItem, OutlinedInput, Select} from "@mui/material";
 
 export const RoleModalSelect = ({control, defaultValue, errors, helperText}) => {
-
     const roles = [
         {id: '0', label: 'editor'},
         {id: '1', label: 'administrator'}
@@ -35,5 +34,4 @@ export const RoleModalSelect = ({control, defaultValue, errors, helperText}) => 
             )}
         />
     );
-
 }

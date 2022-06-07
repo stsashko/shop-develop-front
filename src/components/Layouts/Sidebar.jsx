@@ -6,47 +6,24 @@ import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import {styled} from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
-import {ListItemButton, ListItemIcon, ListItemText, ListSubheader} from "@mui/material";
+import {ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PeopleIcon from "@mui/icons-material/People";
 import CategoryIcon from '@mui/icons-material/Category';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
-import BarChartIcon from "@mui/icons-material/BarChart";
-import LayersIcon from "@mui/icons-material/Layers";
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import AssignmentIcon from "@mui/icons-material/Assignment";
 import BusinessIcon from '@mui/icons-material/Business';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import StoreIcon from '@mui/icons-material/Store';
-// import {Route} from "react-router-dom";
-
 import {useSelector} from "react-redux";
-
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import {
-    CATEGORIES_ROUTE,
-    CUSTOMERS_ROUTE,
-    DASHBOARD_ROUTE,
-    DELIVERIES_ROUTE,
-    MANUFACTURERS_ROUTE,
-    ORDERS_ROUTE, PRODUCTS_ROUTE, PURCHASES_ROUTE, STORES_ROUTE, USERS_ROUTE
+    CATEGORIES_ROUTE, CUSTOMERS_ROUTE, DASHBOARD_ROUTE, DELIVERIES_ROUTE, MANUFACTURERS_ROUTE, PRODUCTS_ROUTE, PURCHASES_ROUTE, STORES_ROUTE, USERS_ROUTE
 } from "../RouterConstants";
-
-// <Route path="orders" element={<Orders />} />
-// <Route path="customers" element={<Customers />} />
-// <Route path="categories" element={<Categories />} />
-// <Route path="deliveries" element={<Deliveries />} />
-// <Route path="manufacturers" element={<Manufacturers />} />
-// <Route path="products" element={<Products />} />
-// <Route path="purchases" element={<Purchases />} />
-// <Route path="stores" element={<Stores />} />
-
 
 const menuMain = [
     {title: 'Dashboard', Icon: <DashboardIcon/>, path: DASHBOARD_ROUTE,},
-    // {title: 'Orders', Icon: <ShoppingCartIcon/>, path: ORDERS_ROUTE},
     {title: 'Customers', Icon: <PeopleIcon/>, path: CUSTOMERS_ROUTE},
     {title: 'Categories', Icon: <CategoryIcon/>, path: CATEGORIES_ROUTE},
     {title: 'Deliveries', Icon: <LocalShippingIcon/>, path: DELIVERIES_ROUTE},
@@ -91,10 +68,6 @@ export default ({open, drawerWidth, toggleDrawer}) => {
     );
 
     const {pathname} = useLocation();
-// pathname: '/dashboard'
-//     console.log(location);
-
-    // selected={selectedIndex === 1}
 
     return (
         <Drawer variant="permanent" open={open}>
@@ -113,10 +86,6 @@ export default ({open, drawerWidth, toggleDrawer}) => {
             <Divider/>
             <List component="nav">
                 {menuMain.map(item => (
-
-                    // component={ NavLink }
-                    // to={ menu_item.path }
-
                     <ListItemButton key={item.title} to={item.path} component={NavLink} selected={pathname === `/${item.path}`}>
                         <ListItemIcon>
                             {item.Icon}

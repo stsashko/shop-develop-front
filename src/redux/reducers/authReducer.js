@@ -4,16 +4,9 @@ const initialState = {
     loading: true,
     authenticated: false,
     user: {},
-    // user: {
-    //     id: null,
-    //     name: null,
-    //     email: null,
-    //     avatar: null
-    // },
 }
 
 const authReducer = (state = initialState, action) => {
-
     switch (action.type) {
         case SET_USER:
             let {id, name, email, avatar, role} = action.payload;

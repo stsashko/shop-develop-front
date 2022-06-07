@@ -1,24 +1,17 @@
 import {
-    CircularProgress,
-    Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, OutlinedInput, Select, TextField
+    Dialog, DialogActions, DialogContent, DialogTitle
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import ButtonWithLoading from "../ButtonWithLoading";
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import Grid from "@mui/material/Grid";
-import {Controller, useForm} from "react-hook-form";
+import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
-
 import IconButton from "@mui/material/IconButton";
-
 import CloseIcon from '@mui/icons-material/Close';
-import {TextModalField} from "../ModalFields/TextModalField";
-
 import {Alert} from "@mui/lab";
-// import {productApi} from "../../api/productApi";
 
 export const ModalData = ({title, id, openModal, handleCloseModal, isLoadSingle, updateSingle, insertSingle, getApi, addApi, updApi, validationSchema, children}) => {
-
     const [loading, setLoading] = useState(false);
 
     const [errorServer, setErrorServer] = useState(false);
@@ -28,7 +21,6 @@ export const ModalData = ({title, id, openModal, handleCloseModal, isLoadSingle,
     } = useForm({
         resolver: yupResolver(validationSchema),
     });
-
 
     const [dataDb, setDataDB] = useState(false);
 
@@ -49,7 +41,6 @@ export const ModalData = ({title, id, openModal, handleCloseModal, isLoadSingle,
         getData();
     }, [getData]);
 
-
     useEffect(() => {
         const timer = setTimeout(() => {
             setErrorServer(false);
@@ -57,7 +48,6 @@ export const ModalData = ({title, id, openModal, handleCloseModal, isLoadSingle,
 
         return () => clearTimeout(timer);
     }, [errorServer])
-
 
     const submitProduct = async (id, data) => {
         return id ? await updApi(id, data) : await addApi(data);
@@ -81,11 +71,8 @@ export const ModalData = ({title, id, openModal, handleCloseModal, isLoadSingle,
                 setErrorServer(error);
             }
         }).finally(() => {
-            // fileRef.current.value = null;
             setLoading(false);
         });
-
-
     };
 
     const childrens = children?.length ? children : [children];
@@ -110,7 +97,6 @@ export const ModalData = ({title, id, openModal, handleCloseModal, isLoadSingle,
             </Grid>
         );
     })
-
 
     return (
         <Dialog open={openModal} onClose={handleCloseModal}>
@@ -149,5 +135,4 @@ export const ModalData = ({title, id, openModal, handleCloseModal, isLoadSingle,
             </form>
         </Dialog>
     );
-
 }

@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import {Content} from "../../components/Content";
 import {useQuery} from "../../hooks/useQuery/useQuery";
@@ -33,9 +32,7 @@ import validationSchemaModal from "./validationModal";
 import {TextModalField} from "../../components/ModalFields/TextModalField";
 import ConfirmDelete from "../../components/ConfirmDelete";
 
-
 const StoresPage = () => {
-
     const query = useQuery();
 
     const head = useHead();
@@ -43,13 +40,15 @@ const StoresPage = () => {
     const [stores, setStores] = useState([]);
 
     const [total, setTotal] = useState(0);
+
     const [page, setPage] = useState((query.get("page") ? parseInt(query.get("page")) : false) || 1);
 
-    const [rowsPerPage, setRowsPerPage] = useState(30);
+    const rowsPerPage = 30;
 
     const [dataFetched, setDataFetched] = useState(true);
 
     const [loading, setLoading] = useState(false);
+
     const [loadingConfirm, setLoadingConfirm] = useState(false);
 
     const [confirmDelete, setConfirmDelete] = useState(false);
@@ -59,29 +58,16 @@ const StoresPage = () => {
     });
 
     const [openBackdrop, setOpenBackdrop] = useState(false)
+
     const [openModal, setOpenModal] = useState(false);
-    // const [productId, setProductId] = useState(null);
+
     const [storeId, setStoreId] = useState(null);
 
     const navigate = useNavigate();
 
-    // const {control} = useForm();
-
-    // const handleRequestSort = (event, property) => {
-    //     const isAsc = orderBy === property && order === 'asc';
-    //     setOrder(isAsc ? 'desc' : 'asc');
-    //     setOrderBy(property);
-    // };
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
-
-    // const handleChangeRowsPerPage = (event) => {
-    //     setRowsPerPage(parseInt(event.target.value, 10));
-    //     setPage(1);
-    // };
-
 
     const updateSingleStore = ({id, store_name, created_at, updated_at}) => {
         const storesNew = stores.map(currentItem => {
@@ -89,7 +75,6 @@ const StoresPage = () => {
                 id, store_name, created_at, updated_at
             } : currentItem;
         })
-
         setStores(storesNew);
         setOpenModal(false);
         setStoreId(null);
@@ -153,7 +138,6 @@ const StoresPage = () => {
     }
 
     const handleDelete = (id) => {
-
         setLoadingConfirm(true);
 
         deleteStoreApi(id)
@@ -166,13 +150,7 @@ const StoresPage = () => {
             setLoadingConfirm(false);
             setConfirmDelete(false);
         });
-
-        // alert(id);
-
-        // setConfirmDelete(true);
-        // alert(id);
     }
-
 
     return (
         <Content title="Stores" titlePage="Stores">
@@ -180,7 +158,6 @@ const StoresPage = () => {
                           setLoading={setLoading} resetFields={{search: ''}}>
                 <SearchFilterField defaultValue={filter.search}/>
             </FilterLayout>
-
             <Box sx={{width: '100%'}}>
                 <Paper sx={{width: '100%', mb: 2}}>
                     <Pagination count={Math.ceil(total / rowsPerPage)} page={page} onChange={handleChangePage}
@@ -194,7 +171,6 @@ const StoresPage = () => {
                         >
                             {head.titlePage}
                         </Typography>
-
                         <Button variant="outlined" size="small" onClick={() => setOpenModal(true)}>Create</Button>
                     </Toolbar>
                     <TableContainer>
@@ -259,8 +235,6 @@ const StoresPage = () => {
                                         })}
                                     </React.Fragment>)
                                 }
-
-
                             </TableBody>
                         </Table>
                     </TableContainer>
@@ -276,7 +250,6 @@ const StoresPage = () => {
                     >
                         <CircularProgress color="inherit"/>
                     </Backdrop>
-
                     <ModalData
                         title="store"
                         id={storeId}
@@ -297,11 +270,9 @@ const StoresPage = () => {
                     </ModalData>
                 </React.Fragment>
             )}
-
             <ConfirmDelete confirmDelete={confirmDelete} setConfirmDelete={setConfirmDelete} loading={loadingConfirm}
                            handleDelete={handleDelete}/>
         </Content>
     );
 }
-
 export default StoresPage;

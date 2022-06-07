@@ -12,22 +12,20 @@ import {useDispatch} from "react-redux";
 import {registerAction} from "../../redux/actions/authActions";
 import ButtonWithLoading from "../../components/ButtonWithLoading";
 import {useEffect, useRef, useState} from "react";
-
 import {yupResolver} from "@hookform/resolvers/yup";
 import validationSchema from "./validation";
-
 import {Alert} from "@mui/lab";
 import {NavLink, useNavigate} from "react-router-dom";
-
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import {FormControl, FormHelperText} from "@mui/material";
 
 export default function RegisterPage() {
-
     const dispatch = useDispatch();
 
     const [loading, setLoading] = useState(false);
+
     const [errorServer, setErrorServer] = useState(false);
+
     const [addAvatar, setAddAvatar] = useState(false);
 
     const formRef = useRef();
@@ -49,7 +47,6 @@ export default function RegisterPage() {
 
     const onSubmit = (data) => {
         setLoading(true);
-
         dispatch(registerAction(data)).then((res) => {
             navigate('/');
         }).catch((error) => {
@@ -67,7 +64,6 @@ export default function RegisterPage() {
             reset();
             setLoading(false);
         });
-
     };
 
     useEffect(() => {
@@ -77,7 +73,6 @@ export default function RegisterPage() {
 
         return () => clearTimeout(timer);
     }, [errorServer])
-
 
     const handlePressEnter = (e) => {
         if (e.keyCode === 13) {
@@ -107,7 +102,6 @@ export default function RegisterPage() {
                 <Typography component="h1" variant="h5">
                     Register
                 </Typography>
-
                 <form noValidate onSubmit={handleSubmit(onSubmit)} ref={formRef} encType="multipart/form-data">
                     <Controller
                         name="name"
@@ -148,7 +142,6 @@ export default function RegisterPage() {
                             />
                         )}
                     />
-
                     <Controller
                         name="password"
                         control={control}
@@ -171,7 +164,6 @@ export default function RegisterPage() {
                             />
                         )}
                     />
-
                     <FormControl error={Boolean(errors.file?.message)}>
                         <Button
                                 variant="outlined"
@@ -192,21 +184,17 @@ export default function RegisterPage() {
                             {errors.file?.message}
                         </FormHelperText>
                     </FormControl>
-
                     {errorServer && (
                         <Alert severity="error">
                             {errorServer.map(item => <div key={item}>{item}</div>)}
                         </Alert>
                     )}
-
                     <ButtonWithLoading
                         sx={{mt: 3, mb: 2}}
                         fullWidth={true}
                         loading={loading}
                     >Register now</ButtonWithLoading>
-
                     <div style={{textAlign:"center"}}><NavLink to="/login">Sign In</NavLink></div>
-
                 </form>
             </Box>
         </Container>

@@ -9,14 +9,9 @@ export const basicStatisticApi = () => {
             } else {
                 reject(response.errors);
             }
-
-            // setTimeout(() => {
-            //     resolve(response.data);
-            // }, 999)
         })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }

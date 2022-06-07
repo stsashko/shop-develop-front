@@ -1,18 +1,15 @@
-import React, {useCallback, useEffect, useState, useMemo} from "react";
+import React, {useEffect, useState, useMemo} from "react";
 import {Controller} from "react-hook-form";
-import {CircularProgress, FormControl, FormHelperText, MenuItem, OutlinedInput, Select, TextField} from "@mui/material";
-import {getCategoriesAllApi} from "../../api/categoryApi";
+import {CircularProgress, TextField} from "@mui/material";
 import {findProductApi} from "../../api/productApi";
 import Autocomplete from "@mui/material/Autocomplete";
 import throttle from 'lodash/throttle'
 
 export const ProductModalSelect = ({control, defaultValue, errors, helperText, register, setValue, trigger, dataDb}) => {
-
     defaultValue = defaultValue ? {id: defaultValue, label: dataDb.product_name} : '';
 
     const [valueCurrent, setValueCurrent] = useState(defaultValue);
 
-    // const [productId, setProductId] = React.useState(defaultValue !== '' && defaultValue?.product_id ? defaultValue?.product_id : '');
     const [inputValue, setInputValue] = useState('');
 
     const [options, setOptions] = useState([]);
@@ -35,14 +32,12 @@ export const ProductModalSelect = ({control, defaultValue, errors, helperText, r
         [],
     );
 
-
     useEffect(() => {
         if(defaultValue?.id)
             setValue('product_id', defaultValue.id);
     }, [defaultValue])
 
     useEffect(() => {
-
         let active = true;
 
         if (!open)
@@ -127,12 +122,10 @@ export const ProductModalSelect = ({control, defaultValue, errors, helperText, r
                             </React.Fragment>
                         )
                     }}
-
                 />
             )}
             control={control}
             defaultValue={defaultValue}
         />
     );
-
 }

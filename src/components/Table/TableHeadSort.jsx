@@ -5,7 +5,6 @@ import TableCell from "@mui/material/TableCell";
 import TableSortLabel from "@mui/material/TableSortLabel";
 
 export const TableHeadSort = ({order, orderBy, onRequestSort, headCells}) => {
-
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
     };

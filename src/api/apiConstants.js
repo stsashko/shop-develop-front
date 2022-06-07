@@ -1,7 +1,3 @@
-// import {logOutApi} from "./authApi";
-// import {deliverieApi} from "./deliverieApi";
-
-import CustomersPage from "../pages/Customers/CustomersPage";
 
 export const API_PATH = {
     login: 'login',
@@ -63,9 +59,4 @@ export const API_PATH = {
     updStore: 'store',
     deleteStore: 'store',
 
-    // comments: 'comments',
-    // albums: 'albums',
-    // photos: 'photos',
-    // todos: 'todos',
-    // users: 'users'
 }

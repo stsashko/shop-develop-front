@@ -1,21 +1,14 @@
 import React, {forwardRef, useState} from "react";
-import {Controller} from "react-hook-form";
 import {TextField} from "@mui/material";
 import Grid from "@mui/material/Grid";
-
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
-export const DateFilterRange = ({control, defaultValue, register, setValue}) => {
+export const DateFilterRange = ({defaultValue, register, setValue}) => {
     const [dateRange, setDateRange] = useState( defaultValue !== '' ? defaultValue.split(" - ").filter(d => d !== '').map(d => new Date(d)) : [null, null]);
-
     const [startDate, endDate] = dateRange;
-
     const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => {
-
-        // console.log(value);
         setValue('date', value);
-
         return <TextField
             {...register("date")}
             fullWidth
@@ -36,8 +29,6 @@ export const DateFilterRange = ({control, defaultValue, register, setValue}) => 
                 startDate={startDate}
                 endDate={endDate}
                 onChange={(update, v) => {
-                    // console.log(update, v);
-
                     setDateRange(update);
                 }}
                 customInput={<ExampleCustomInput />}
@@ -46,5 +37,4 @@ export const DateFilterRange = ({control, defaultValue, register, setValue}) => 
             />
         </Grid>
     );
-
 }

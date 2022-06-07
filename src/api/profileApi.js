@@ -3,7 +3,6 @@ import {API_PATH} from "./apiConstants";
 
 export const updProfileApi = (data) => {
     return new Promise((resolve, reject) => {
-
         const formData = new FormData();
         for (const [key, value] of Object.entries(data)) {
             if(key === 'file')
@@ -11,7 +10,6 @@ export const updProfileApi = (data) => {
             else if(value)
                     formData.append(key, value);
         }
-
         axios({
             method: "post",
             url: API_PATH.updProfile,
@@ -25,24 +23,9 @@ export const updProfileApi = (data) => {
                 else {
                     reject(response.errors);
                 }
-                // setTimeout(() => {
-                //     resolve(response.data);
-                // }, 999)
             })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
-
-
-
-
-
-
-
-
-
-
-
     });
 }

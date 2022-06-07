@@ -1,7 +1,6 @@
 import axios from "./axiosInstance";
 import {API_PATH} from "./apiConstants";
 
-
 export const getUsersApi = ({page, rowsPerPage, search, role}) => {
     return new Promise((resolve, reject) => {
         axios.get(`${API_PATH.getUsers}/${page}`, {
@@ -19,25 +18,16 @@ export const getUsersApi = ({page, rowsPerPage, search, role}) => {
             } else {
                 reject(response.errors);
             }
-
-            // setTimeout(() => {
-            //     resolve(response.data);
-            // }, 999)
         })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
 
-
-
-
 export const getUserApi = (id) => {
     return new Promise((resolve, reject) => {
         axios.get(`${API_PATH.getUser}/${id}`).then(({data: response}) => {
-
             if (response.success) {
                 resolve({
                     ...response.data,
@@ -46,25 +36,16 @@ export const getUserApi = (id) => {
             } else {
                 reject(response.errors);
             }
-
-            // setTimeout(() => {
-            //     resolve(response.data);
-            // }, 999)
         })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
 
-
-
 export const addUserApi = (data) => {
-
     return new Promise((resolve, reject) => {
         const formData = new FormData();
-
         for (const [key, value] of Object.entries(data)) {
             if(key === 'avatar')
                 formData.append("avatar", value[0]);
@@ -72,7 +53,6 @@ export const addUserApi = (data) => {
                 formData.append(key, value);
             }
         }
-
         axios({
             method: "post",
             url: `${API_PATH.addUser}`,
@@ -86,23 +66,15 @@ export const addUserApi = (data) => {
                 else {
                     reject(response.errors);
                 }
-                // setTimeout(() => {
-                //     resolve(response.data);
-                // }, 999)
             })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
-
 }
 
-
 export const updUserApi = (id, data) => {
-
     return new Promise((resolve, reject) => {
-
         const formData = new FormData();
         for (const [key, value] of Object.entries(data)) {
             if(key === 'avatar')
@@ -110,7 +82,6 @@ export const updUserApi = (id, data) => {
             else if(value.toString())
                 formData.append(key, value);
         }
-
         axios({
             method: "post",
             url: `${API_PATH.updUser}/${id}`,
@@ -124,38 +95,24 @@ export const updUserApi = (id, data) => {
                 else {
                     reject(response.errors);
                 }
-                // setTimeout(() => {
-                //     resolve(response.data);
-                // }, 999)
             })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
-
 }
-
 
 export const deleteUserApi = (id) => {
     return new Promise((resolve, reject) => {
         axios.delete(`${API_PATH.deleteUser}/${id}`).then(({data: response}) => {
-
             if (response.success) {
                 resolve(true);
             } else {
                 reject(response.errors);
             }
-
-            // setTimeout(() => {
-            //     resolve(response.data);
-            // }, 999)
         })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
-
-

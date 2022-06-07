@@ -1,21 +1,15 @@
 import {
-    CircularProgress,
-    Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, OutlinedInput, Select, TextField
+    Dialog, DialogActions, DialogContent, DialogTitle
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import ButtonWithLoading from "../ButtonWithLoading";
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import validationSchema from "./validation";
-import {updateProfileAction} from "../../redux/actions/profileActions";
-import Avatar from "@mui/material/Avatar";
-import {getCategoriesApi} from "../../api/categoryApi";
-
 import {addProductApi, productApi, updProductApi} from "../../api/productApi";
 import IconButton from "@mui/material/IconButton";
-
 import CloseIcon from '@mui/icons-material/Close';
 import {TextModalField} from "../ModalFields/TextModalField";
 import {CategoryModalSelect} from "../ModalFields/CategoryModalSelect";
@@ -24,53 +18,15 @@ import {FileImageModalField} from "../ModalFields/FileImageModalField";
 import {Alert} from "@mui/lab";
 
 export const ProductModal = ({id, openModal, handleCloseModal, isLoadSingle, updateSingleProduct, insertSingleProduct}) => {
-
     const [loading, setLoading] = useState(false);
 
     const [errorServer, setErrorServer] = useState(false);
 
     const {
-        control, register, handleSubmit, formState: {errors}, setError, reset,
+        control, register, handleSubmit, formState: {errors}, setError
     } = useForm({
         resolver: yupResolver(validationSchema),
     });
-
-    // const fileReg = register('image');
-    // const fileRef = useRef();
-
-    // const [categories, setCategories] = useState([]);
-    //
-    // const getCategories = useCallback(() => {
-    //     categoryApi()
-    //         .then(({data}) => {
-    //             setCategories(data);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // }, []);
-    //
-    // useEffect(() => {
-    //     getCategories();
-    // }, [getCategories]);
-
-
-    // const [manufacturers, setManufacturers] = useState([]);
-    //
-    // const getManufacturers = useCallback(() => {
-    //     manufacturerApi()
-    //         .then(({data}) => {
-    //             setManufacturers(data);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // }, []);
-    //
-    // useEffect(() => {
-    //     getManufacturers();
-    // }, [getManufacturers]);
-
 
     const [product, setProduct] = useState(false);
 
@@ -99,16 +55,12 @@ export const ProductModal = ({id, openModal, handleCloseModal, isLoadSingle, upd
         return () => clearTimeout(timer);
     }, [errorServer])
 
-
     const submitProduct = async (id, data) => {
        return id ? await updProductApi(id, data) : await addProductApi(data);
-        // return await addProductApi(data);
     }
 
     const onSubmitData = (data) => {
         setLoading(true);
-
-        // let submitProduct = id ? updProductApi : addProductApi;
 
         submitProduct(product?.id, data).then((data) => {
             if(id) updateSingleProduct(data);
@@ -128,13 +80,9 @@ export const ProductModal = ({id, openModal, handleCloseModal, isLoadSingle, upd
                 setErrorServer(error);
             }
         }).finally(() => {
-            // fileRef.current.value = null;
             setLoading(false);
         });
-
-
     };
-
 
     return (
         <Dialog open={openModal} onClose={handleCloseModal}>
@@ -231,5 +179,4 @@ export const ProductModal = ({id, openModal, handleCloseModal, isLoadSingle, upd
             </form>
         </Dialog>
     );
-
 }

@@ -3,7 +3,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
-import { NavLink, useNavigate } from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import {Menu, MenuItem} from "@mui/material";
@@ -13,27 +13,20 @@ import {
     PROFILE_ROUTE
 } from "../RouterConstants";
 import {logOutAction} from './../../redux/actions/authActions';
-// import {logOutApi} from './../../api/authApi'
 import {useDispatch, useSelector} from "react-redux";
 import {logOutApi} from "../../api/authApi";
 import {setShowLoadDelay} from "../../redux/actions/loadDelayActions";
 import useHead from "./../../hooks/useHead";
-// import { Helmet } from 'react-helmet-async';
 
 export default ({open, drawerWidth, toggleDrawer}) => {
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const user = useSelector((state) => state.authReducer.user);
-
     const head = useHead();
-
     const menuSettings = [
         {title: 'Profile', path: PROFILE_ROUTE},
         {title: 'Logout', path: LOGOUT_ROUTE}
     ];
-
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleOpenUserMenu = (event) => {
@@ -57,7 +50,6 @@ export default ({open, drawerWidth, toggleDrawer}) => {
             .then((data) => {
                 dispatch(logOutAction());
                 navigate('/');
-                // console.log('logOutApi');
             })
             .catch()
             .finally(() => {
@@ -87,8 +79,6 @@ export default ({open, drawerWidth, toggleDrawer}) => {
                 >
                     <MenuIcon/>
                 </IconButton>
-
-
                 <Typography
                     component="h1"
                     variant="h6"
@@ -98,10 +88,9 @@ export default ({open, drawerWidth, toggleDrawer}) => {
                 >
                     {head.titlePage}
                 </Typography>
-
                 <Box>
                     <IconButton onClick={handleOpenUserMenu} sx={{p: 0, display: 'inline-block'}}>
-                        <Avatar alt={user.name} src={user.avatar} />
+                        <Avatar alt={user.name} src={user.avatar}/>
                     </IconButton>
                     <Menu
                         sx={{mt: '45px'}}
@@ -120,19 +109,19 @@ export default ({open, drawerWidth, toggleDrawer}) => {
                         onClose={handleCloseUserMenu}
                     >
                         {menuSettings.map((setting) => {
-
-                            if(setting.title !== 'Logout')
+                            if (setting.title !== 'Logout')
                                 return (
-                                    <MenuItem key={setting.title} to={setting.path} component={NavLink} onClick={handleCloseUserMenu}>
+                                    <MenuItem key={setting.title} to={setting.path} component={NavLink}
+                                              onClick={handleCloseUserMenu}>
                                         <Typography textAlign="center">{setting.title}</Typography>
                                     </MenuItem>
                                 );
                             else
                                 return (
-                                <MenuItem key={setting.title} onClick={handleLogOut}>
-                                    <Typography textAlign="center">{setting.title}</Typography>
-                                </MenuItem>
-                            )
+                                    <MenuItem key={setting.title} onClick={handleLogOut}>
+                                        <Typography textAlign="center">{setting.title}</Typography>
+                                    </MenuItem>
+                                )
 
                         })}
                     </Menu>
@@ -140,6 +129,4 @@ export default ({open, drawerWidth, toggleDrawer}) => {
             </Toolbar>
         </AppBar>
     );
-
 }
-

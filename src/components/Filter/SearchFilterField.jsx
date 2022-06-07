@@ -23,5 +23,4 @@ export const SearchFilterField = ({control, defaultValue}) => {
             />
         </Grid>
     );
-
 }

@@ -1,14 +1,9 @@
-import React, {forwardRef, useState} from "react";
-import {useForm} from "react-hook-form";
+import React, {useState} from "react";
 import {Controller} from "react-hook-form";
-import {FormHelperText, TextField} from "@mui/material";
-import Grid from "@mui/material/Grid";
-// import DatePicker from "react-datepicker";
-
+import {TextField} from "@mui/material";
 import InputMask from "react-input-mask";
 
-export const DateModalField = ({control, defaultValue, name, label, errors, helperText, register}) => {
-
+export const DateModalField = ({control, defaultValue, name, label, errors, helperText}) => {
     const [phone, setPhone] = useState(defaultValue);
 
     return (
@@ -42,6 +37,4 @@ export const DateModalField = ({control, defaultValue, name, label, errors, help
             )}
         />
     );
-
-
 }

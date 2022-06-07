@@ -1,7 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import Typography from '@mui/material/Typography';
 import {basicStatisticApi} from "../../api/statisticApi";
-import {purchasesChartApi} from "../../api/purchasesApi";
 
 export default () => {
     const [statistic, setStatistic] = useState({deliveries_total: 0, purchases_total: 0});

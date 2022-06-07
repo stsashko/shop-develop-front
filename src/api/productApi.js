@@ -1,7 +1,6 @@
 import axios from "./axiosInstance";
 import {API_PATH} from "./apiConstants";
 
-
 export const getProductsApi = ({page, order, orderBy, rowsPerPage, search, category_id, manufacturer_id}) => {
     return new Promise((resolve, reject) => {
         axios.get(`${API_PATH.getProducts}/${page}`, {
@@ -22,59 +21,30 @@ export const getProductsApi = ({page, order, orderBy, rowsPerPage, search, categ
             } else {
                 reject(response.errors);
             }
-
-            // setTimeout(() => {
-            //     resolve(response.data);
-            // }, 999)
         })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
 
-
-
-
-
-
-
-
-
-
-
-
 export const getProductApi = (id) => {
     return new Promise((resolve, reject) => {
         axios.get(`${API_PATH.getProduct}/${id}`).then(({data: response}) => {
-
-            // const {data, success} = response.data;
-
-
             if (response.success) {
                 resolve(response.data);
             } else {
                 reject(response.errors);
             }
-
-            // setTimeout(() => {
-            //     resolve(response.data);
-            // }, 999)
         })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
 
-
-
 export const addProductApi = (data) => {
-
     return new Promise((resolve, reject) => {
-
         const formData = new FormData();
         for (const [key, value] of Object.entries(data)) {
             if(key === 'image')
@@ -82,7 +52,6 @@ export const addProductApi = (data) => {
             else if(value)
                 formData.append(key, value);
         }
-
         axios({
             method: "post",
             url: `${API_PATH.addProduct}`,
@@ -96,23 +65,15 @@ export const addProductApi = (data) => {
                 else {
                     reject(response.errors);
                 }
-                // setTimeout(() => {
-                //     resolve(response.data);
-                // }, 999)
             })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
-
 }
 
-
 export const updProductApi = (id, data) => {
-
     return new Promise((resolve, reject) => {
-
         const formData = new FormData();
         for (const [key, value] of Object.entries(data)) {
             if(key === 'image')
@@ -120,7 +81,6 @@ export const updProductApi = (id, data) => {
             else if(value)
                 formData.append(key, value);
         }
-
         axios({
             method: "post",
             url: `${API_PATH.updProduct}/${id}`,
@@ -134,28 +94,15 @@ export const updProductApi = (id, data) => {
                 else {
                     reject(response.errors);
                 }
-                // setTimeout(() => {
-                //     resolve(response.data);
-                // }, 999)
             })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
-
 }
 
-
-
-
-
-
-
 export const findProductApi = (search) => {
-
     return new Promise((resolve, reject) => {
-
         axios.get(API_PATH.findProduct, {
             params: {
                 search
@@ -168,39 +115,24 @@ export const findProductApi = (search) => {
                 else {
                     reject(response.errors);
                 }
-                // setTimeout(() => {
-                //     resolve(response.data);
-                // }, 999)
             })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
-
 }
-
-
 
 export const deleteProductApi = (id) => {
     return new Promise((resolve, reject) => {
         axios.delete(`${API_PATH.deleteProduct}/${id}`).then(({data: response}) => {
-
             if (response.success) {
                 resolve(true);
             } else {
                 reject(response.errors);
             }
-
-            // setTimeout(() => {
-            //     resolve(response.data);
-            // }, 999)
         })
             .catch(error => {
                 reject([error.message]);
-                // reject(error?.response?.data.errors);
             });
     });
 }
-
-

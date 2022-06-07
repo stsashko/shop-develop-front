@@ -5,7 +5,6 @@ const initialState = {
 }
 
 const loadDelayReducer = (state = initialState, action) => {
-
     switch (action.type) {
         case LOAD_DELAY:
             return {

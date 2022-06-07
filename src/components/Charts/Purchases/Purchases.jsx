@@ -1,9 +1,5 @@
-import React, {PureComponent, useEffect, useRef, useState, useMemo, useCallback} from 'react';
+import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {
-    ResponsiveContainer,
-    ComposedChart,
-    Line,
-    Area,
     Label,
     Bar,
     XAxis,
@@ -13,14 +9,12 @@ import {
     Legend,
     BarChart
 } from 'recharts';
-import {Title} from "@mui/icons-material";
+
 import {purchasesChartApi} from "../../../api/purchasesApi";
 
 export default function() {
-
     const [width, setWidth] = useState(0);
     const [purchases, setPurchases] = useState([]);
-
     const myRef = useRef(null);
 
     const getCurrentWidth = () => {
@@ -41,12 +35,10 @@ export default function() {
         getPurchasesChart();
     }, []);
 
-
     useEffect(() => {
         setWidth(getCurrentWidth());
         window.addEventListener('resize', (event) => {
             setWidth(getCurrentWidth());
-            // console.log('resize', getCurrentWidth());
         }, true);
     }, [])
 
@@ -94,10 +86,6 @@ export default function() {
                 <Bar yAxisId="left" dataKey="Purchases" fill="#00AEFF" barSize={10} />
                 <Bar yAxisId="right" dataKey="Total" fill="#FFE414" barSize={10} />
             </BarChart>
-
-
         </div>
     );
 }
-
-

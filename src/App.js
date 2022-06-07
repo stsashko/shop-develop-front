@@ -1,18 +1,16 @@
 import React, {useEffect} from "react";
 
-import {Routes, Route} from 'react-router-dom';
-
 import './App.css';
 
-import LoginPage from "./pages/Login/LoginPage";
-import Layout from "./components/Layouts/Layout";
-import DashboardPage from "./pages/Dashboard/DashboardPage";
-import {useDispatch, useSelector} from "react-redux";
-import authReducer from "./redux/reducers/authReducer";
-import {getUserAction, setLoading} from "./redux/actions/authActions";
+import {Routes, Route} from 'react-router-dom';
+
 import Box from "@mui/material/Box";
 import {CircularProgress} from "@mui/material";
-// import OrdersPage from "./pages/Orders/OrdersPage";
+import {useDispatch, useSelector} from "react-redux";
+import {getUserAction} from "./redux/actions/authActions";
+
+import LoginPage from "./pages/Login/LoginPage";
+import DashboardPage from "./pages/Dashboard/DashboardPage";
 import CustomersPage from "./pages/Customers/CustomersPage";
 import CategoriesPage from "./pages/Categories/CategoriesPage";
 import DeliveriesPage from "./pages/Deliveries/DeliveriesPage";
@@ -51,7 +49,6 @@ function App() {
             </Box>
         );
 
-
     return (
         <Routes>
             <Route path="/login" element={<LoginPage/>}/>
@@ -59,7 +56,6 @@ function App() {
             <Route path="/" element={<ProtectedRoutes/>}>
                 <Route index element={<DashboardPage/>}/>
                 <Route path="dashboard" element={<DashboardPage/>}/>
-                {/*<Route path="orders" element={<OrdersPage/>}/>*/}
                 <Route path="customers" element={<CustomersPage/>}/>
                 <Route path="categories" element={<CategoriesPage/>}/>
                 <Route path="deliveries" element={<DeliveriesPage/>}/>

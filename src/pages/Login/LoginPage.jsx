@@ -1,9 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-
 import Avatar from '@mui/material/Avatar';
 import {useForm, Controller} from "react-hook-form";
-import Button from '@mui/material/Button';
-import LoadingButton from '@mui/lab/LoadingButton';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -15,18 +12,13 @@ import Container from '@mui/material/Container';
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthenticated, setUserAction} from "../../redux/actions/authActions";
 import ButtonWithLoading from "../../components/ButtonWithLoading";
-
 import {loginApi} from "../../api/authApi";
-
 import {yupResolver} from "@hookform/resolvers/yup";
 import validationSchema from "./validation";
-
-import {Alert, AlertTitle} from "@mui/lab";
+import {Alert} from "@mui/lab";
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
-import Link from "@mui/material/Link";
 
 export default function LoginPage() {
-
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
@@ -83,14 +75,6 @@ export default function LoginPage() {
         return () => clearTimeout(timer);
     }, [errorServer])
 
-
-    const handlePressEnter = (e) => {
-        // if (e.keyCode === 13) {
-        //     handleSubmit(onSubmit);
-        //     e.target.blur();
-        // }
-    };
-
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
@@ -131,7 +115,6 @@ export default function LoginPage() {
                             />
                         )}
                     />
-
                     <Controller
                         name="password"
                         control={control}
@@ -148,9 +131,6 @@ export default function LoginPage() {
                                 autoComplete="current-password"
                                 error={Boolean(errors.password?.message)}
                                 helperText={errors.password?.message}
-                                onKeyDown={e => {
-                                    handlePressEnter(e)
-                                }}
                             />
                         )}
                     />
@@ -166,21 +146,17 @@ export default function LoginPage() {
 
                         )}
                     />
-
                     {errorServer && (
                         <Alert severity="error">
                             {errorServer.map(item => <div key={item}>{item}</div>)}
                         </Alert>
                     )}
-
                     <ButtonWithLoading
                         sx={{mt: 3, mb: 2}}
                         fullWidth={true}
                         loading={loading}
                     >Sign In</ButtonWithLoading>
-
                     <div style={{textAlign:"center"}}><NavLink to="/register">Register</NavLink></div>
-
                 </form>
             </Box>
         </Container>

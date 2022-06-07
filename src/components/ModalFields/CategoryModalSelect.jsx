@@ -20,7 +20,6 @@ export const CategoryModalSelect = ({control, defaultValue, errors, helperText})
         getCategories();
     }, [getCategories]);
 
-
     if(categories.length === 0)
         return <Select size="small" defaultValue="1" fullWidth><MenuItem value="1"><CircularProgress style={{width: '17px', height: '17px', marginTop: '3px', verticalAlign: 'top'}} /></MenuItem></Select>;
 
@@ -50,5 +49,4 @@ export const CategoryModalSelect = ({control, defaultValue, errors, helperText})
             )}
         />
     );
-
 }

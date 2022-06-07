@@ -1,7 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Content} from "../../components/Content";
-// import './style.css';
-
 
 const Page404 = () => {
     return (

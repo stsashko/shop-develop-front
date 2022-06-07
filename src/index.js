@@ -11,17 +11,16 @@ import {ThemeProvider} from "@mui/material";
 import theme from "./theme";
 import {BrowserRouter} from "react-router-dom";
 import HeadProvider from "./providers/HeadProvider";
+import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 
-const store = createStore(rootReducer, compose(
-    applyMiddleware(
-        thunk
-    ),
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-));
+const store = createStore(
+    rootReducer,
+    composeWithDevTools(applyMiddleware(thunk))
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    // <React.StrictMode>
+    <React.StrictMode>
         <ThemeProvider theme={theme}>
             <BrowserRouter>
                 <Provider store={store}>
@@ -31,10 +30,7 @@ root.render(
                 </Provider>
             </BrowserRouter>
         </ThemeProvider>
-    // </React.StrictMode>
+    </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

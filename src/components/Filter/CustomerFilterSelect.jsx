@@ -1,28 +1,15 @@
-import React, {useCallback, useEffect, useState, useMemo} from "react";
+import React, {useEffect, useState, useMemo} from "react";
 import {Controller} from "react-hook-form";
-import {CircularProgress, MenuItem, OutlinedInput, Select, TextField} from "@mui/material";
+import {CircularProgress, TextField} from "@mui/material";
 import Grid from "@mui/material/Grid";
-import {getProductsAllApi} from "../../api/categoryApi";
 import Autocomplete from '@mui/material/Autocomplete';
 import {findCustomerApi, getCustomerApi} from "../../api/customerApi";
 import throttle from "lodash/throttle";
-import {findProductApi} from "../../api/productApi";
-
-export const CustomerFilterSelect = ({control, defaultValue, register, setValue}) => {
-
-    // const [customer, setCustomer] = useState(defaultValue);
-
-    // defaultValue = defaultValue ? {customer_id: defaultValue} : '';
-
-    // defaultValue = defaultValue ? {customer_id: defaultValue} : '';
-
-
+export const CustomerFilterSelect = ({control, defaultValue, setValue}) => {
     const [valueCurrent, setValueCurrent] = useState('');
     const [inputValue, setInputValue] = useState('');
     const [options, setOptions] = useState([]);
-
     const [open, setOpen] = useState(false);
-
     const [loading, setLoading] = useState(false);
 
     useEffect( () => {
@@ -35,7 +22,7 @@ export const CustomerFilterSelect = ({control, defaultValue, register, setValue}
                         label: `${results.customer_fname} ${results.customer_lname}`
                     });
                 } catch (err) {
-                    // console.log(err);
+                    console.log(err);
                 }
             })();
         }
@@ -47,10 +34,7 @@ export const CustomerFilterSelect = ({control, defaultValue, register, setValue}
                 try {
                     let results = await findCustomerApi(inputValue);
                     callback(results);
-
-                } catch (err) {
-                    // console.log(err);
-                }
+                } catch (err) {}
             }, 300),
         [],
     );
@@ -83,7 +67,6 @@ export const CustomerFilterSelect = ({control, defaultValue, register, setValue}
             active = false;
         };
     }, [valueCurrent, inputValue, fetch]);
-
 
     return (
         <Grid item xs={12} sm={6} md={4}>
@@ -146,15 +129,4 @@ export const CustomerFilterSelect = ({control, defaultValue, register, setValue}
             />
         </Grid>
     );
-
 }
-
-
-
-
-
-
-
-
-
-

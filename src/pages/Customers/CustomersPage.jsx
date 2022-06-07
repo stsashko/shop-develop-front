@@ -20,9 +20,7 @@ import TableHead from '@mui/material/TableHead';
 import {getCustomersApi} from "../../api/customerApi";
 import Pagination from '@mui/material/Pagination';
 import ModalData from "../../components/ModalData";
-
 import validationSchemaModal from "./validationModal";
-
 import {getCustomerApi, addCustomerApi, updCustomerApi, deleteCustomerApi} from "../../api/customerApi";
 import {TextModalField} from "../../components/ModalFields/TextModalField";
 import IconButton from '@mui/material/IconButton';
@@ -31,22 +29,22 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ConfirmDelete from "../../components/ConfirmDelete";
 
 const CustomersPage = () => {
-
     const query = useQuery();
 
     const head = useHead();
 
-    // const [products, setProducts] = useState([]);
     const [customers, setCustomers] = useState([]);
 
     const [total, setTotal] = useState(0);
+
     const [page, setPage] = useState((query.get("page") ? parseInt(query.get("page")) : false) || 1);
 
-    const [rowsPerPage, setRowsPerPage] = useState(30);
+    const rowsPerPage = 30;
 
     const [dataFetched, setDataFetched] = useState(true);
 
     const [loading, setLoading] = useState(false);
+
     const [loadingConfirm, setLoadingConfirm] = useState(false);
 
     const [confirmDelete, setConfirmDelete] = useState(false);
@@ -56,29 +54,16 @@ const CustomersPage = () => {
     });
 
     const [openBackdrop, setOpenBackdrop] = useState(false)
+
     const [openModal, setOpenModal] = useState(false);
-    // const [productId, setProductId] = useState(null);
+
     const [customerId, setCustomerId] = useState(null);
 
     const navigate = useNavigate();
 
-    // const {control} = useForm();
-
-    // const handleRequestSort = (event, property) => {
-    //     const isAsc = orderBy === property && order === 'asc';
-    //     setOrder(isAsc ? 'desc' : 'asc');
-    //     setOrderBy(property);
-    // };
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
-
-    // const handleChangeRowsPerPage = (event) => {
-    //     setRowsPerPage(parseInt(event.target.value, 10));
-    //     setPage(1);
-    // };
-
 
     const updateSingleCustomer = ({id, customer_fname, customer_lname, created_at, updated_at}) => {
         const customersNew = customers.map(currentItem => {
@@ -86,7 +71,6 @@ const CustomersPage = () => {
                 id, customer_fname, customer_lname, created_at, updated_at
             } : currentItem;
         })
-
         setCustomers(customersNew);
         setOpenModal(false);
         setCustomerId(null);
@@ -126,7 +110,6 @@ const CustomersPage = () => {
             setDataFetched(false);
             setLoading(false);
         });
-
     }, [page, rowsPerPage, filter]);
 
     const openCustomer = (e, id) => {
@@ -150,9 +133,7 @@ const CustomersPage = () => {
     }
 
     const handleDelete = (id) => {
-
         setLoadingConfirm(true);
-
         deleteCustomerApi(id)
             .then((data) => {
                 deleteSingleCustomer(id);
@@ -163,21 +144,14 @@ const CustomersPage = () => {
             setLoadingConfirm(false);
             setConfirmDelete(false);
         });
-
-        // alert(id);
-
-        // setConfirmDelete(true);
-        // alert(id);
     }
 
     return (
         <Content title="Customers" titlePage="Customers">
-
             <FilterLayout setPage={page => setPage(page + 1)} filter={filter} setFilter={setFilter} loading={loading}
                           setLoading={setLoading} resetFields={{search: ''}}>
                 <SearchFilterField defaultValue={filter.search}/>
             </FilterLayout>
-
             <Box sx={{width: '100%'}}>
                 <Paper sx={{width: '100%', mb: 2}}>
                     <Pagination count={Math.ceil(total / rowsPerPage)} page={page} onChange={handleChangePage}
@@ -258,8 +232,6 @@ const CustomersPage = () => {
                                         })}
                                     </React.Fragment>)
                                 }
-
-
                             </TableBody>
                         </Table>
                     </TableContainer>
@@ -275,7 +247,6 @@ const CustomersPage = () => {
                     >
                         <CircularProgress color="inherit"/>
                     </Backdrop>
-
                     <ModalData
                         title="customer"
                         id={customerId}
@@ -300,13 +271,9 @@ const CustomersPage = () => {
                     </ModalData>
                 </React.Fragment>
             )}
-
             <ConfirmDelete confirmDelete={confirmDelete} setConfirmDelete={setConfirmDelete} loading={loadingConfirm} handleDelete={handleDelete} />
-
         </Content>
     );
-
-
 }
 
 export default CustomersPage;

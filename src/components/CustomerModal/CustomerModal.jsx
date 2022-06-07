@@ -1,6 +1,5 @@
 import {
-    CircularProgress,
-    Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, OutlinedInput, Select, TextField
+    Dialog, DialogActions, DialogContent, DialogTitle
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import ButtonWithLoading from "../ButtonWithLoading";
@@ -9,31 +8,21 @@ import Grid from "@mui/material/Grid";
 import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import validationSchema from "./validationModal";
-
 import {getCustomerApi, addCustomerApi, updCustomerApi} from "../../api/customerApi";
-
 import IconButton from "@mui/material/IconButton";
-
 import CloseIcon from '@mui/icons-material/Close';
 import {TextModalField} from "../ModalFields/TextModalField";
-
 import {Alert} from "@mui/lab";
-// import {productApi} from "../../api/productApi";
 
 export const CustomerModal = ({id, openModal, handleCloseModal, isLoadSingle, updateSingle, insertSingle}) => {
-
     const [loading, setLoading] = useState(false);
-
     const [errorServer, setErrorServer] = useState(false);
-
     const {
-        control, register, handleSubmit, formState: {errors}, setError, reset,
+        control, handleSubmit, formState: {errors}, setError
     } = useForm({
         resolver: yupResolver(validationSchema),
     });
-
     const [customer, setCustomer] = useState(false);
-
     const getCustomer = useCallback(() => {
         if(id) {
             getCustomerApi(id)
@@ -51,7 +40,6 @@ export const CustomerModal = ({id, openModal, handleCloseModal, isLoadSingle, up
         getCustomer();
     }, [getCustomer]);
 
-
     useEffect(() => {
         const timer = setTimeout(() => {
             setErrorServer(false);
@@ -59,7 +47,6 @@ export const CustomerModal = ({id, openModal, handleCloseModal, isLoadSingle, up
 
         return () => clearTimeout(timer);
     }, [errorServer])
-
 
     const submitProduct = async (id, data) => {
         return id ? await updCustomerApi(id, data) : await addCustomerApi(data);
@@ -83,13 +70,9 @@ export const CustomerModal = ({id, openModal, handleCloseModal, isLoadSingle, up
                 setErrorServer(error);
             }
         }).finally(() => {
-            // fileRef.current.value = null;
             setLoading(false);
         });
-
-
     };
-
 
     return (
         <Dialog open={openModal} onClose={handleCloseModal}>
@@ -152,5 +135,4 @@ export const CustomerModal = ({id, openModal, handleCloseModal, isLoadSingle, up
             </form>
         </Dialog>
     );
-
 }

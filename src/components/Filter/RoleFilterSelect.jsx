@@ -32,5 +32,4 @@ export const RoleFilterSelect = ({control, defaultValue}) => {
             />
         </Grid>
     );
-
 }

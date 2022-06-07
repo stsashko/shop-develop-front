@@ -1,9 +1,8 @@
-import React, {useEffect, useMemo} from "react";
-// import {Helmet} from "react-helmet";
+import React, {useEffect} from "react";
 import {Helmet, HelmetProvider} from 'react-helmet-async';
 import useHead from "./../hooks/useHead";
 
-export const Content = ({children, title = '', titlePage = '', ...props}) => {
+export const Content = ({children, title = '', titlePage = ''}) => {
     const head = useHead();
 
     useEffect(() => {
@@ -14,7 +13,6 @@ export const Content = ({children, title = '', titlePage = '', ...props}) => {
         <HelmetProvider>
             <Helmet>
                 <title>{title}</title>
-                {/*<link rel="canonical" href="https://www.tacobell.com/" />*/}
             </Helmet>
             {children}
         </HelmetProvider>

@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from "react";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import {Content} from "../../components/Content";
 import {useQuery} from "../../hooks/useQuery/useQuery";
 import useHead from "../../hooks/useHead";
 import {createSearchParams, useNavigate} from "react-router-dom";
-
 import {FilterLayout} from "../../components/Filter/FilterLayout";
 import {SearchFilterField} from "../../components/Filter/SearchFilterField";
 import Box from "@mui/material/Box";
@@ -34,7 +32,6 @@ import {
 } from "../../api/manufacturerApi";
 
 const ManufacturersPage = () => {
-
     const query = useQuery();
 
     const head = useHead();
@@ -42,6 +39,7 @@ const ManufacturersPage = () => {
     const [manufacturers, setManufacturers] = useState([]);
 
     const [total, setTotal] = useState(0);
+
     const [page, setPage] = useState((query.get("page") ? parseInt(query.get("page")) : false) || 1);
 
     const [rowsPerPage, setRowsPerPage] = useState(30);
@@ -49,6 +47,7 @@ const ManufacturersPage = () => {
     const [dataFetched, setDataFetched] = useState(true);
 
     const [loading, setLoading] = useState(false);
+
     const [loadingConfirm, setLoadingConfirm] = useState(false);
 
     const [confirmDelete, setConfirmDelete] = useState(false);
@@ -57,30 +56,17 @@ const ManufacturersPage = () => {
         search: query.get("search") || '',
     });
 
-    const [openBackdrop, setOpenBackdrop] = useState(false)
+    const [openBackdrop, setOpenBackdrop] = useState(false);
+
     const [openModal, setOpenModal] = useState(false);
-    // const [productId, setProductId] = useState(null);
+
     const [manufacturerId, setManufacturerId] = useState(null);
 
     const navigate = useNavigate();
 
-    // const {control} = useForm();
-
-    // const handleRequestSort = (event, property) => {
-    //     const isAsc = orderBy === property && order === 'asc';
-    //     setOrder(isAsc ? 'desc' : 'asc');
-    //     setOrderBy(property);
-    // };
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
-
-    // const handleChangeRowsPerPage = (event) => {
-    //     setRowsPerPage(parseInt(event.target.value, 10));
-    //     setPage(1);
-    // };
-
 
     const updateSingleManufacturer = ({id, manufacturer_name, created_at, updated_at}) => {
         const manufacturersNew = manufacturers.map(currentItem => {
@@ -152,7 +138,6 @@ const ManufacturersPage = () => {
     }
 
     const handleDelete = (id) => {
-
         setLoadingConfirm(true);
 
         deleteManufacturerApi(id)
@@ -165,13 +150,7 @@ const ManufacturersPage = () => {
             setLoadingConfirm(false);
             setConfirmDelete(false);
         });
-
-        // alert(id);
-
-        // setConfirmDelete(true);
-        // alert(id);
     }
-
 
     return (
         <Content title="Manufacturers" titlePage="Manufacturers">
@@ -179,7 +158,6 @@ const ManufacturersPage = () => {
                           setLoading={setLoading} resetFields={{search: ''}}>
                 <SearchFilterField defaultValue={filter.search}/>
             </FilterLayout>
-
             <Box sx={{width: '100%'}}>
                 <Paper sx={{width: '100%', mb: 2}}>
                     <Pagination count={Math.ceil(total / rowsPerPage)} page={page} onChange={handleChangePage}
@@ -193,7 +171,6 @@ const ManufacturersPage = () => {
                         >
                             {head.titlePage}
                         </Typography>
-
                         <Button variant="outlined" size="small" onClick={() => setOpenModal(true)}>Create</Button>
                     </Toolbar>
                     <TableContainer>
@@ -258,8 +235,6 @@ const ManufacturersPage = () => {
                                         })}
                                     </React.Fragment>)
                                 }
-
-
                             </TableBody>
                         </Table>
                     </TableContainer>
@@ -275,7 +250,6 @@ const ManufacturersPage = () => {
                     >
                         <CircularProgress color="inherit"/>
                     </Backdrop>
-
                     <ModalData
                         title="manufacturer"
                         id={manufacturerId}
@@ -296,7 +270,6 @@ const ManufacturersPage = () => {
                     </ModalData>
                 </React.Fragment>
             )}
-
             <ConfirmDelete confirmDelete={confirmDelete} setConfirmDelete={setConfirmDelete} loading={loadingConfirm}
                            handleDelete={handleDelete}/>
         </Content>

@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import {Content} from "../../components/Content";
 import {useQuery} from "../../hooks/useQuery/useQuery";
@@ -48,13 +47,15 @@ const DeliveriesPage = () => {
     const [deliveries, setDeliveries] = useState([]);
 
     const [total, setTotal] = useState(0);
+
     const [page, setPage] = useState((query.get("page") ? parseInt(query.get("page")) : false) || 1);
 
-    const [rowsPerPage, setRowsPerPage] = useState(30);
+    const rowsPerPage = 30;
 
     const [dataFetched, setDataFetched] = useState(true);
 
     const [loading, setLoading] = useState(false);
+
     const [loadingConfirm, setLoadingConfirm] = useState(false);
 
     const [confirmDelete, setConfirmDelete] = useState(false);
@@ -66,8 +67,9 @@ const DeliveriesPage = () => {
     });
 
     const [openBackdrop, setOpenBackdrop] = useState(false)
+
     const [openModal, setOpenModal] = useState(false);
-    // const [productId, setProductId] = useState(null);
+
     const [deliveryId, setDeliveryId] = useState(null);
 
     const navigate = useNavigate();
@@ -166,7 +168,6 @@ const DeliveriesPage = () => {
     }
 
     const handleDelete = (id) => {
-
         setLoadingConfirm(true);
 
         deleteDeliveryApi(id)
@@ -319,11 +320,9 @@ const DeliveriesPage = () => {
                     </ModalData>
                 </React.Fragment>
             )}
-
             <ConfirmDelete confirmDelete={confirmDelete} setConfirmDelete={setConfirmDelete} loading={loadingConfirm}
                            handleDelete={handleDelete}/>
         </Content>
-
     );
 }
 

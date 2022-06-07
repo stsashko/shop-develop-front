@@ -1,5 +1,5 @@
-import {HIDE_LOADING, LOG_OUT, SET_AUTHENTICATED, SET_USER, UPDATE_PROFILE} from './types'
-import {getUserApi, loginApi, logOutApi, registerApi} from '../../api/authApi'
+import {HIDE_LOADING, LOG_OUT, SET_AUTHENTICATED, SET_USER} from './types'
+import {getUserApi, registerApi} from '../../api/authApi'
 
 export const setUserAction = (payload) => ({
     type: SET_USER,
@@ -21,15 +21,11 @@ export const getUserAction = () => {
                 dispatch(setUserAction(result));
                 dispatch(setAuthenticated());
             })
-            .catch(error => {
-                // console.log(error);
-                // dispatch(addTodoFailure(err.message));
-            }).finally(() => {
+            .catch(error => {}).finally(() => {
             dispatch(hideLoading());
         });
     }
 }
-
 
 export const registerAction = (data) => {
     return dispatch => {
@@ -48,52 +44,4 @@ export const registerAction = (data) => {
     }
 }
 
-
-
-
-
-/*
-export const logOutAction = () => {
-    return dispatch => {
-        logOutApi()
-            .then(result => {
-                dispatch({type: LOG_OUT});
-            })
-            .catch(error => {
-                // console.log(error);
-                // dispatch(addTodoFailure(err.message));
-            }).finally(() => {
-            // dispatch(hideLoading());
-        });
-    }
-}
-*/
-
 export const logOutAction = () => ({type: LOG_OUT});
-
-
-
-
-// SET_AUTHENTICATED
-
-
-/*
-export const setUser = (data) => {
-    return dispatch => {
-        loginApi(data)
-            .then(data => {
-                // dispatch(addTodoSuccess(res.data));
-            })
-            .catch(err => {
-
-                console.log(err);
-
-                // dispatch(addTodoFailure(err.message));
-            });
-
-    }
-
-    // type : SET_USER,
-    // payload
-}
-*/

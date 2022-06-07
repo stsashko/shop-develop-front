@@ -1,12 +1,8 @@
-// https://github.com/jquense/yup
-// number().label('age').positive().integer(),
-
 import * as yup from "yup";
 
 const schema = yup.object().shape({
     name: yup.string().required(),
     email: yup.string().email().required(),
-    // password: yup.string().min(6).required(),
     password: yup.string().test(
         'empty-or-6',
         'Password must be at least 6 characters',

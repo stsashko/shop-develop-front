@@ -1,21 +1,14 @@
-import React, {useRef, useState} from "react";
-import {useForm} from "react-hook-form";
+import React, {useState} from "react";
 import {Controller} from "react-hook-form";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-// import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import {FormControl, FormHelperText} from "@mui/material";
-
 import ImageIcon from '@mui/icons-material/Image';
 
 export const FileImageModalField = ({control, defaultValue, name, register, errors, helperText}) => {
-
     const [changeFile, setChangeFile] = useState(false);
-
     const fileField = register(name, {required: true});
-
     return (
         <Controller
             name={name}
@@ -50,5 +43,4 @@ export const FileImageModalField = ({control, defaultValue, name, register, erro
             )}
         />
     );
-
 }
