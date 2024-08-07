@@ -1,4 +1,4 @@
-# Internet store admin panel (front-end)
+# Online store admin panel (front-end)
 
 Used technologies:
 * React
@@ -9,7 +9,7 @@ Used technologies:
 * additional packages
 
 ## ***The result of the work***
-[https://shop.mydevelop.in.net/](https://shop.mydevelop.in.net/)
+[https://shop.myspirit.site/](https://shop.myspirit.site/)
 
 login: user@gmail.com
 
